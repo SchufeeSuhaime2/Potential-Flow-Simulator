@@ -208,6 +208,12 @@ with col_reset:
 
 # --- Simulation ---
 if run:
+    # Check if all flow inputs are zero
+    flow_values = [st.session_state[k] for k in flow_keys]
+    if all(abs(v) < 1e-6 for v in flow_values):
+        st.warning("⚠️ Please enter at least one non-zero flow element to simulate (e.g., Uniform flow, Source, etc.).")
+        st.stop()
+
     x = np.linspace(-4, 4, 200)
     y = np.linspace(-4, 4, 200)
     X, Y = np.meshgrid(x, y)
@@ -289,6 +295,8 @@ if run:
         ax2.set_ylim(-4, 4)
         ax2.set_aspect("equal")
         st.pyplot(fig2)
+        st.markdown("**Description**: This plot shows the stream function (ψ), where each contour line represents a streamline, indicating the direction of the flow.")
+
 
     if show_phi:
         fig3, ax3 = plt.subplots(figsize=(6, 6))
@@ -299,6 +307,8 @@ if run:
         ax3.set_ylim(-4, 4)
         ax3.set_aspect("equal")
         st.pyplot(fig3)
+        st.markdown("**Description**: This plot shows the potential function (ϕ), where each line is an equipotential contour — always orthogonal to streamlines in potential flow.")
+
 
     if show_psi and show_phi:
         fig4, ax4 = plt.subplots(figsize=(6, 6))
@@ -311,6 +321,8 @@ if run:
         ax4.set_ylim(-4, 4)
         ax4.set_aspect("equal")
         st.pyplot(fig4)
+        st.markdown("**Description**: This combined plot overlays the stream function (ψ, blue) and potential function (ϕ, green dashed). The perpendicular intersection of lines confirms the irrotational nature of the flow.")
+
 
     # Footer on simulation page
     st.markdown("<hr><p style='text-align: center;'>Developed by A. Abd Razak & S. Suhaime – 2025</p>", unsafe_allow_html=True)
