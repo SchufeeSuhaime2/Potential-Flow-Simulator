@@ -66,7 +66,7 @@ Ideal for students learning fluid mechanics, PFITT helps explain streamline patt
         st.session_state["entered"] = True
         st.rerun()
 
-    st.markdown("<hr><p style='text-align: center;'>Developed by A. Abd Razak & S. Suhaime – 2025</p>", unsafe_allow_html=True)
+    st.markdown("<hr><p style='text-align: center;'>© Developed by A. Abd Razak & S. Suhaime – 2025</p>", unsafe_allow_html=True)
     st.stop()
 
 # === Main Simulation Starts ===
